@@ -11,7 +11,7 @@
 		(company "Free Modular")
 	)
 	(lib_symbols
-		(symbol "Device:LED_RKBG"
+		(symbol "Device:LED_RKGB"
 			(pin_names
 				(offset 0)
 				(hide yes)
@@ -27,7 +27,7 @@
 					)
 				)
 			)
-			(property "Value" "LED_RKBG"
+			(property "Value" "LED_RKGB"
 				(at 0 -8.89 0)
 				(effects
 					(font
@@ -53,7 +53,7 @@
 					(hide yes)
 				)
 			)
-			(property "Description" "RGB LED, red/cathode/blue/green"
+			(property "Description" "RGB LED, red/cathode/green/blue"
 				(at 0 0 0)
 				(effects
 					(font
@@ -80,7 +80,7 @@
 					(hide yes)
 				)
 			)
-			(symbol "LED_RKBG_0_0"
+			(symbol "LED_RKGB_0_0"
 				(text "R"
 					(at 1.905 3.81 0)
 					(effects
@@ -106,7 +106,7 @@
 					)
 				)
 			)
-			(symbol "LED_RKBG_0_1"
+			(symbol "LED_RKGB_0_1"
 				(circle
 					(center -2.032 0)
 					(radius 0.254)
@@ -438,7 +438,7 @@
 					)
 				)
 			)
-			(symbol "LED_RKBG_1_1"
+			(symbol "LED_RKGB_1_1"
 				(pin passive line
 					(at -5.08 0 0)
 					(length 2.54)
@@ -485,7 +485,7 @@
 							)
 						)
 					)
-					(number "4"
+					(number "3"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -503,7 +503,7 @@
 							)
 						)
 					)
-					(number "3"
+					(number "4"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -1306,80 +1306,6 @@
 		)
 	)
 	(symbol
-		(lib_id "Device:LED_RKBG")
-		(at 106.68 71.12 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "5a094032-8ad1-4442-a4fc-c7c39750a282")
-		(property "Reference" "D1"
-			(at 106.68 57.15 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "LED_RKBG"
-			(at 106.68 59.69 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "LED_THT:LED_D5.0mm-4_RGB"
-			(at 106.68 72.39 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 106.68 72.39 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "RGB LED, red/cathode/blue/green"
-			(at 106.68 71.12 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "3"
-			(uuid "7e665b1f-2bb6-488c-833a-9d3d80ce96cb")
-		)
-		(pin "1"
-			(uuid "a7ea4973-e2a3-47e1-ad15-012c3538d2c6")
-		)
-		(pin "4"
-			(uuid "ed7c419e-725d-40d0-b48e-726764f101c5")
-		)
-		(pin "2"
-			(uuid "b884825a-e03e-4ca3-b25e-90e9c765308e")
-		)
-		(instances
-			(project ""
-				(path "/bf0b830d-6ea8-4ffe-b350-63f7ac69529d/657d6a20-99d4-49b9-af36-5ff58c444039"
-					(reference "D1")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "FreeModular:THONKICONN")
 		(at 68.58 76.2 0)
 		(unit 1)
@@ -1589,6 +1515,80 @@
 			(project "lights_pcb"
 				(path "/bf0b830d-6ea8-4ffe-b350-63f7ac69529d/657d6a20-99d4-49b9-af36-5ff58c444039"
 					(reference "J1")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:LED_RKGB")
+		(at 106.68 71.12 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "be69e49a-6c79-470b-8032-6213aacc0465")
+		(property "Reference" "D1"
+			(at 106.68 57.15 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "LED_RKGB"
+			(at 106.68 59.69 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "LED_THT:LED_D5.0mm-4_RGB"
+			(at 106.68 72.39 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 106.68 72.39 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "RGB LED, red/cathode/green/blue"
+			(at 106.68 71.12 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "3"
+			(uuid "23b0dab2-024f-4d26-bccb-8ef5903f352e")
+		)
+		(pin "1"
+			(uuid "4f5e9415-038d-44a6-8113-c7738af827f1")
+		)
+		(pin "2"
+			(uuid "fe43b4c1-71fb-4029-9f9d-f715fbb0705a")
+		)
+		(pin "4"
+			(uuid "abed6d63-65be-479b-b00f-7e5972f3ac30")
+		)
+		(instances
+			(project ""
+				(path "/bf0b830d-6ea8-4ffe-b350-63f7ac69529d/657d6a20-99d4-49b9-af36-5ff58c444039"
+					(reference "D1")
 					(unit 1)
 				)
 			)
