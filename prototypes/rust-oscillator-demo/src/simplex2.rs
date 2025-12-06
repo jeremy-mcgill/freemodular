@@ -3,43 +3,35 @@ use crate::{
     utils::PerlinSequence1D,
 };
 
-pub struct SimplexOscillator {
+pub struct SimplexOscillator2 {
     sample_rate: u32,
     phase: f32,
-    drift: [(PerlinSequence1D, PerlinSequence1D); 8],
     debug_rollover_flag: bool,
 
     frequency: f32,
     radius: f32,
-    aspect: f32,
-    drift_speed: f32,
-    drift_depth: f32,
+    harmonics: i32,
     seed: i32,
-    voices: i32,
 }
 
-impl SimplexOscillator {
+impl SimplexOscillator2 {
     pub fn new() -> Self {
         Self {
             sample_rate: 0,
             phase: 0.0,
-            drift: [(PerlinSequence1D::new(), PerlinSequence1D::new()); 8],
             debug_rollover_flag: false,
 
             frequency: 220.0,
             radius: 1.0,
-            aspect: 1.0,
-            drift_speed: 0.0,
-            drift_depth: 0.0,
+            harmonics: 1,
             seed: 0,
-            voices: 1,
         }
     }
 }
 
-impl SoundAlgorithm for SimplexOscillator {
+impl SoundAlgorithm for SimplexOscillator2 {
     fn get_name(&self) -> &'static str {
-        "Simplex terrain"
+        "Simplex harmonics"
     }
 
     fn debug_get_freq(&mut self) -> f32 {
@@ -65,26 +57,19 @@ impl SoundAlgorithm for SimplexOscillator {
             self.debug_rollover_flag = true;
         }
 
+        let x = (self.phase * 2.0 * std::f32::consts::PI).sin() * self.radius;
+        let y = (self.phase * 2.0 * std::f32::consts::PI).sin() * self.radius;
+
         let mut output = 0.0;
-
-        for i in 0..self.voices {
-            let x_offset = self.drift[i as usize]
-                .0
-                .next_sample(self.drift_speed, self.sample_rate)
-                * self.drift_depth;
-            let y_offset = self.drift[i as usize]
-                .1
-                .next_sample(self.drift_speed, self.sample_rate)
-                * self.drift_depth;
-
-            let x = (self.phase * 2.0 * std::f32::consts::PI).sin() * self.radius + x_offset;
-            let y = (self.phase * 2.0 * std::f32::consts::PI).sin() * self.radius * self.aspect
-                + y_offset;
-            output +=
-                opensimplex2::fast::noise3_ImproveXY(self.seed.into(), x.into(), y.into(), 0.0)
+        for i in 0..self.harmonics {
+            let seed = self.seed + 100 * i;
+            let x = x * i as f32;
+            let y = y * i as f32;
+            output += opensimplex2::fast::noise3_ImproveXY(seed.into(), x.into(), y.into(), 0.0)
+                / (i + 1) as f32;
         }
 
-        output / self.voices as f32
+        output
     }
 
     fn parameters(&self) -> Vec<SoundParameter> {
@@ -106,19 +91,12 @@ impl SoundAlgorithm for SimplexOscillator {
                 },
             },
             SoundParameter {
-                value: self.aspect,
-                name: "Aspect",
-                param_type: ParamType::Float { min: 1.0, max: 5.0 },
-            },
-            SoundParameter {
-                value: self.drift_speed,
-                name: "Drift_speed",
-                param_type: ParamType::Float { min: 0.0, max: 4.0 },
-            },
-            SoundParameter {
-                value: self.drift_depth,
-                name: "Drift_depth",
-                param_type: ParamType::Float { min: 0.0, max: 4.0 },
+                value: self.radius,
+                name: "Harmonics",
+                param_type: ParamType::Float {
+                    min: 1.0,
+                    max: 10.0,
+                },
             },
             SoundParameter {
                 value: self.seed as f32,
@@ -127,11 +105,6 @@ impl SoundAlgorithm for SimplexOscillator {
                     min: 0.0,
                     max: 10.0,
                 },
-            },
-            SoundParameter {
-                value: self.voices as f32,
-                name: "Voices",
-                param_type: ParamType::Float { min: 1.0, max: 4.0 },
             },
         ]
     }
@@ -144,20 +117,11 @@ impl SoundAlgorithm for SimplexOscillator {
             "Radius" => {
                 self.radius = value;
             }
-            "Aspect" => {
-                self.aspect = value;
-            }
-            "Drift_speed" => {
-                self.drift_speed = value;
-            }
-            "Drift_depth" => {
-                self.drift_depth = value;
+            "Harmonics" => {
+                self.harmonics = value.round() as i32;
             }
             "Seed" => {
                 self.seed = value.round() as i32;
-            }
-            "Voices" => {
-                self.voices = value.round() as i32;
             }
             _ => panic!("Unexpected parameter name: {}", name),
         }

@@ -2,6 +2,7 @@ mod complex_osc;
 mod harmonic_wt_osc;
 mod interface;
 mod oversample_antialiasing;
+mod simplex2;
 mod simplex_terrain;
 mod sin_oscillator;
 mod utils;
@@ -15,6 +16,7 @@ use eframe::epaint::{self, Color32, PathStroke, Rect};
 use harmonic_wt_osc::HarmonicWtOsc;
 use interface::SoundAlgorithm;
 use oversample_antialiasing::Antialiased;
+use simplex2::SimplexOscillator2;
 use simplex_terrain::SimplexOscillator;
 use sin_oscillator::SinOscillator;
 use std::sync::{mpsc, Arc, Mutex};
@@ -51,6 +53,7 @@ impl AppState {
                     Box::new(HarmonicWtOsc::new()),
                     Box::new(Antialiased::new(ComplexOscillator::new())),
                     Box::new(SimplexOscillator::new()),
+                    Box::new(SimplexOscillator2::new()),
                 ],
                 volume: 0.25,
             })),
