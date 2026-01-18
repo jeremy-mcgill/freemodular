@@ -27,7 +27,7 @@ pub fn render_submenu_page<DI, SIZE>(
 {
     match menu_update {
         MenuUpdate::UpdateValueAtCursor | MenuUpdate::ToggleEditingAtCursor => {
-            draw_submenu_item(cursor, true, 0, editing.into(), false, channel, display);
+            draw_submenu_item(cursor, true, scroll, editing.into(), false, channel, display);
         }
         MenuUpdate::MoveCursorFrom(_) | MenuUpdate::Scroll(_) | MenuUpdate::SwitchScreens => {
             if channel.division == -65 {
