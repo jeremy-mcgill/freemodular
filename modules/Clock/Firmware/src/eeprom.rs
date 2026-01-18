@@ -200,4 +200,13 @@ impl PersistanceManager {
     pub fn set_swing(&mut self, channel: u8, sw: u8) {
         self.write_channel_attribute(channel, offset_of!(ClockChannelConfig, swing) as u8, sw);
     }
+
+    #[inline(always)]
+    pub fn set_probability(&mut self, channel: u8, probability: u8) {
+        self.write_channel_attribute(
+            channel,
+            offset_of!(ClockChannelConfig, probability) as u8,
+            probability
+        );
+    }
 }
