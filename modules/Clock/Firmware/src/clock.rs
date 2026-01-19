@@ -14,6 +14,7 @@ pub struct ClockConfig {
     pub bpm: u8,
     // This isn't used right now, but reserving the space for a future feature
     pub _is_follower: bool,
+    pub invert_encoder: bool,
 }
 
 impl ClockConfig {
@@ -29,6 +30,7 @@ impl ClockConfig {
                 phase_shift: 0,
             }),
             _is_follower: false,
+            invert_encoder: false,
         }
     }
 }

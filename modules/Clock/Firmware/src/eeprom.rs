@@ -170,6 +170,14 @@ impl PersistanceManager {
     }
 
     #[inline(always)]
+    pub fn set_invert_encoder(&mut self, invert: bool) {
+        self.queue_write(
+            offset_of!(ClockConfig, invert_encoder) as u8, 
+            unsafe { mem::transmute(invert) },
+        );
+    }
+
+    #[inline(always)]
     pub fn set_division(&mut self, channel: u8, division: i8) {
         self.write_channel_attribute(
             channel,
